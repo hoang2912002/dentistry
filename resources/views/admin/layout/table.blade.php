@@ -41,9 +41,9 @@
                 //"bDestroy": true,
                 ajax: url,
                 columns: columns,
-                "order": [
-                    [1, 'desc']
-                ],
+                // "order": [
+                //     [1, 'desc']
+                // ],
                 language: {
                     'paginate': {
                     'previous': '<span class="far prev-icon"><i class="fas fa-solid fa-angle-left"></i></span>',

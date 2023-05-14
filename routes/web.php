@@ -3,10 +3,13 @@
 use App\Http\Controllers\AdminController\GroupController;
 use App\Http\Controllers\AdminController\HomepageAdminController;
 use App\Http\Controllers\AdminController\LoginController;
+use App\Http\Controllers\AdminController\ManufacturerController;
+use App\Http\Controllers\AdminController\MedicineController;
 use App\Http\Controllers\AdminController\RoleController;
 use App\Http\Controllers\AdminController\RoomController;
 use App\Http\Controllers\AdminController\ServiceController;
 use App\Http\Controllers\AdminController\ShiftController;
+use App\Http\Controllers\AdminController\TypeOfMedicineController;
 use App\Http\Controllers\AdminController\UserController;
 use App\Http\Middleware\CheckLoginAdminPage;
 use Illuminate\Support\Facades\Route;
@@ -86,6 +89,36 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::get('edit/{serviceModel}', 'edit')->name('edit');
             Route::patch('update/{serviceModel}', 'update')->name('update');
             Route::delete('destroy/{serviceModel}', 'destroy')->name('destroy');
+            
+        });
+        //Type of medicines
+        Route::group(['controller' => TypeOfMedicineController::class, 'prefix' => 'typeOfMedicine', 'as' => 'typeOfMedicine.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{typeOfMedicineModel}', 'edit')->name('edit');
+            Route::patch('update/{typeOfMedicineModel}', 'update')->name('update');
+            Route::delete('destroy/{typeOfMedicineModel}', 'destroy')->name('destroy');
+            
+        });
+        //Manufaturer
+        Route::group(['controller' => ManufacturerController::class, 'prefix' => 'manufacturer', 'as' => 'manufacturer.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{manufacturerModel}', 'edit')->name('edit');
+            Route::patch('update/{manufacturerModel}', 'update')->name('update');
+            Route::delete('destroy/{manufacturerModel}', 'destroy')->name('destroy');
+            
+        });
+        //Medicines
+        Route::group(['controller' => MedicineController::class, 'prefix' => 'medicine', 'as' => 'medicine.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{medicineModel}', 'edit')->name('edit');
+            Route::patch('update/{medicineModel}', 'update')->name('update');
+            Route::delete('destroy/{medicineModel}', 'destroy')->name('destroy');
             
         });
     });

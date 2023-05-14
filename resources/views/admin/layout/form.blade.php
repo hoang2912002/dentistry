@@ -30,6 +30,16 @@
           const example = new Choices(role);
 
         }
+        if (document.getElementById('choices-manufacturer')) {
+          var role = document.getElementById('choices-manufacturer');
+          const example = new Choices(role);
+
+        }
+        if (document.getElementById('choices-type')) {
+          var role = document.getElementById('choices-type');
+          const example = new Choices(role);
+
+        }
         function visible() {
             var elem = document.getElementById('profileVisibility');
             if (elem) {
