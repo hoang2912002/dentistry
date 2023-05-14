@@ -3,30 +3,34 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>
-        Argon Dashboard 2 PRO by Creative Tim
+        G37 Dental management page
     </title>
-    <link rel="canonical" href="https://www.creative-tim.com/product/argon-dashboard-pro" />
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/fontawesome-free/all.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet"
+        href="{{ asset('asset/admin') }}/css/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/jqvmap/jqvmap.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+    <!--Box icon-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
     <link href="{{ asset('asset/admin') }}/css/nucleo/nucleo-icons.css" rel="stylesheet" />
     <link href="{{ asset('asset/admin') }}/css/nucleo/nucleo-svg.css" rel="stylesheet" />
-    <link href="{{ asset('asset/admin') }}/css/nucleo/nucleo-svg.css" rel="stylesheet" />
     <link id="pagestyle" href="{{ asset('asset/admin') }}/css/argon-dashboard.min.css?v=2.0.5" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
-     alpha/css/bootstrap.css" rel="stylesheet">
-	
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-	<link rel="stylesheet" type="text/css" 
-     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <!--Toastr-->
+    <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/toastr/toastr.min.css">
+   
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    @stack('css')
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -35,7 +39,7 @@
 
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
     @include('admin.layout.left_sidebar')
-    <main class="main-content position-relative border-radius-lg ">
+    <main class="main-content position-relative border-radius-lg ps">
 
         @include('admin.layout.header')
 
@@ -43,10 +47,17 @@
             @yield('content')
             @include('admin.layout.footer')
         </div>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; right: 0px;">
+            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+        </div>
     </main>
-    @include('admin.layout.right_sidebar')
+    {{-- @include('admin.layout.right_sidebar') --}}
     
-    
+    <script src="{{ asset('asset/admin') }}/js/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/jquery/jquery-ui.min.js"></script>
     <script src="{{ asset('asset/admin') }}/js/core/popper.min.js"></script>
     <script src="{{ asset('asset/admin') }}/js/core/bootstrap.min.js"></script>
     <script src="{{ asset('asset/admin') }}/js/plugins/perfect-scrollbar.min.js"></script>
@@ -56,10 +67,18 @@
     <script src="{{ asset('asset/admin') }}/js/plugins/jkanban/jkanban.js"></script>
     <script src="{{ asset('asset/admin') }}/js/plugins/chartjs.min.js"></script>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-    <script src="{{ asset('asset/admin') }}/js/argon-dashboard.min.js?v=2.0.5"></script>
+    <script src="{{ asset('asset/admin') }}/js/toastr/toastr.min.js"></script>
+    {{-- <script src="{{ asset('asset/admin') }}/js/argon-dashboard.min.js?v=2.0.5"></script> --}}
+    
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     <script>
         @if(Session::has('error'))
             toastr.options =
@@ -78,6 +97,7 @@
                     toastr.success("{{ session('success') }}");
         @endif
     </script>
+    @stack('js')
 </body>
 
 </html>

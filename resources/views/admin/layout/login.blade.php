@@ -99,7 +99,7 @@
                                   @enderror
                               </div>
                               <div class="form-check form-switch d-flex pt-2">
-                                  <input class="form-check-input" type="checkbox" id="rememberMe">
+                                  <input class="form-check-input" type="checkbox" id="rememberMe" name="remember">
                                   <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
                               </div>
                               <div class="text-center pt-2">

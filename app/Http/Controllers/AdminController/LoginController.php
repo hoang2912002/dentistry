@@ -24,7 +24,7 @@ class LoginController extends Controller
     public function processLogin(LoginRequest $request) 
     {
         //dd($request);
-        $check = Auth::attempt($request->only(['email','password']));
+        $check = Auth::attempt($request->only(['email','password']),$request->remember);
         // dd(Auth::user()->User);
         if($check){
             return redirect()->route('homepage.index')->with('success' , 'Login successfully');

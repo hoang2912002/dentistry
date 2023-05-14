@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('phone_number');
+            $table->rememberToken();
+            $table->boolean('activated')->default(0);
             $table->timestamps();
         });
     }

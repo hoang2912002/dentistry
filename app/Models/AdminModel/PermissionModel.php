@@ -13,4 +13,8 @@ class PermissionModel extends Model
         'name'
     ];
     
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

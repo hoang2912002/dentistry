@@ -73,6 +73,7 @@
                         onclick="darkMode(this)">
                 </div>
             </div>
+            
             <a class="btn btn-primary w-100" href="{{route('login.logout')}}">LogOut</a>
                
             </div>

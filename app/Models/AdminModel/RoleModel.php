@@ -18,6 +18,11 @@ class RoleModel extends Model
     }
     public function permission()
     {
-        return $this->hasOne(PermissionModel::class,'permission_id','id');
+        return $this->hasOne(PermissionModel::class,'id','permission_id');
+    }
+
+    public function cmp($a, $b)
+    {
+        return $a <=> $b;
     }
 }

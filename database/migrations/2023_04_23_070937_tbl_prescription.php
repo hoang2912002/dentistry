@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('user_uuid');
             $table->integer('total_quantity');
             $table->double('total_price');
+            $table->boolean('activated')->default(0);
             $table->timestamps();
             $table->foreign('user_uuid')->references('uuid')->on('users');
         });

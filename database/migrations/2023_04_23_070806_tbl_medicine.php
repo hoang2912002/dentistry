@@ -14,14 +14,18 @@ return new class extends Migration
         Schema::create('medicines', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('slug');
             $table->integer('quantity');
             $table->string('root');
             $table->double('price');
             $table->unsignedInteger('type_of_medicine_id');
             $table->unsignedInteger('manufacturer_id');
+            $table->boolean('activated')->default(0);
             $table->timestamps();
             $table->foreign('type_of_medicine_id')->references('id')->on('type_of_medicines');
             $table->foreign('manufacturer_id')->references('id')->on('manufactureres');
+            
+            
         });
     }
 

@@ -1,0 +1,88 @@
+
+@push('css')
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/datatables/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/datatables/buttons.bootstrap4.min.css">
+
+@endpush
+
+@push('js')
+
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/datatables.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+    {{-- <script src="{{ asset('asset/admin') }}/js/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/jszip.min.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/pdfmake.min.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/vfs_fonts.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/buttons.print.min.js"></script>
+    <script src="{{ asset('asset/admin') }}/js/plugins/datatables/buttons.colVis.min.js"></script> --}}
+    <script src="{{ asset('asset/admin') }}/js/plugins/sweetalert/2.1.2/sweetalert.min.js"></script>
+   
+    <script>
+       
+        function renderTable(url, columns, totalprice) {
+            $('#dataTable').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "orderable": false,
+                "info": true,
+                "autoWidth": false,
+                "responsive": false,
+                "processing": true,
+                "serverSide": true,
+                //"bDestroy": true,
+                ajax: url,
+                columns: columns,
+                "order": [
+                    [1, 'desc']
+                ],
+                language: {
+                    'paginate': {
+                    'previous': '<span class="far prev-icon"><i class="fas fa-solid fa-angle-left"></i></span>',
+                    'next': '<span class="far next-icon"><i class="fas fa-solid fa-angle-right"></i></span>'
+                    }
+                },
+                
+            });
+        }
+
+
+    </script>
+    <script>
+        function deleteItem(url){
+            console.log(url);
+            swal({
+                title: 'Are you sure?',
+                text: 'This record and it`s details will be permanantly deleted!',
+                icon: 'warning',
+                buttons: ["Cancel", "Yes!"],
+            }).then(function(value) {
+                if (value) {
+                    console.log(value);
+                    $.ajax({
+                        type: "delete",
+                        url: url,
+                        success: function (response) {
+                            if(response == 1){
+                                toastr.success('Deleted successfully!');
+                                $('#dataTable').DataTable().clear().draw(true);
+                            }
+                            else{
+                                toastr.error('Can not deleted');
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+@endpush
+

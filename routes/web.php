@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController\GroupController;
 use App\Http\Controllers\AdminController\HomepageAdminController;
 use App\Http\Controllers\AdminController\LoginController;
+use App\Http\Controllers\AdminController\RoleController;
+use App\Http\Controllers\AdminController\RoomController;
+use App\Http\Controllers\AdminController\ServiceController;
+use App\Http\Controllers\AdminController\ShiftController;
 use App\Http\Controllers\AdminController\UserController;
 use App\Http\Middleware\CheckLoginAdminPage;
 use Illuminate\Support\Facades\Route;
@@ -26,16 +31,61 @@ Route::group(['controller' =>   LoginController::class, 'prefix' => 'login', 'as
 
 Route::middleware([CheckLoginAdminPage::class])->group(function(){
     Route::prefix('admin')->group(function(){
+        //Homepage
         Route::group(['controller' => HomepageAdminController::class, 'prefix' => 'homepage', 'as' => 'homepage.'], function () {
             Route::get('/', 'index')->name('index');
         });
+        //User
         Route::group(['controller' => UserController::class, 'prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('/', 'index')->name('index');
             Route::get('create', 'create')->name('create');
             Route::post('store', 'store')->name('store');
-            Route::post('edit', 'edit')->name('edit');
-            Route::post('update', 'update')->name('update');
-            Route::delete('destroy', 'destroy')->name('destroy');
+            Route::get('edit/{userModel}', 'edit')->name('edit');
+            Route::patch('update/{userModel}', 'update')->name('update');
+            Route::delete('destroy/{userModel}', 'destroy')->name('destroy');
+        });
+        //Group
+        Route::group(['controller' => GroupController::class, 'prefix' => 'group', 'as' => 'group.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{groupModel}', 'edit')->name('edit');
+            Route::patch('update/{groupModel}', 'update')->name('update');
+            Route::delete('destroy/{groupModel}', 'destroy')->name('destroy');
+        });
+        //Shift
+        Route::group(['controller' => ShiftController::class, 'prefix' => 'shift', 'as' => 'shift.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{shiftModel}', 'edit')->name('edit');
+            Route::patch('update/{shiftModel}', 'update')->name('update');
+            Route::delete('destroy/{shiftModel}', 'destroy')->name('destroy');
+        });
+        //Room
+        Route::group(['controller' => RoomController::class, 'prefix' => 'room', 'as' => 'room.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{roomModel}', 'edit')->name('edit');
+            Route::patch('update/{roomModel}', 'update')->name('update');
+            Route::delete('destroy/{roomModel}', 'destroy')->name('destroy');
+            
+        });
+        //Role
+        Route::group(['controller' => RoleController::class, 'prefix' => 'role', 'as' => 'role.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/api','api')->name('api');
+            Route::post('store','store')->name('store');
+        });
+        //Service
+        Route::group(['controller' => ServiceController::class, 'prefix' => 'service', 'as' => 'service.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{serviceModel}', 'edit')->name('edit');
+            Route::patch('update/{serviceModel}', 'update')->name('update');
+            Route::delete('destroy/{serviceModel}', 'destroy')->name('destroy');
             
         });
     });

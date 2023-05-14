@@ -9,6 +9,11 @@ class HomepageAdminController extends Controller
 {
     public function index()
     {
-        return view('admin.homepage');
+        $name_page = [
+            'name' => 'HomePage',
+            'total' => 'Dashboard',
+            'route' => 'homepage.index'
+        ];
+        return view('admin.homepage',compact('name_page'));
     }
 }

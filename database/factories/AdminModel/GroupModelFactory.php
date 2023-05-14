@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories\AdminModel;
-
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +16,10 @@ class GroupModelFactory extends Factory
      */
     public function definition(): array
     {
+        $name = 'Admin';
         return [
-            'name' => 'admin'
+            'name' => $name,
+            'slug' => Str::slug($name),
         ];
     }
 }
