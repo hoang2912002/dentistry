@@ -14,10 +14,10 @@ class GroupUserModel extends Model
     ];
     public function group()
     {
-        return $this->hasOne(GroupModel::class,'group_id','id');
+        return $this->hasOne(GroupModel::class,'id','group_id');
     }
     public function user()
     {
-        return $this->hasOne(UserModel::class,'user_uuid','uuid');
+        return $this->hasOne(UserModel::class,'uuid','user_uuid');
     }
 }

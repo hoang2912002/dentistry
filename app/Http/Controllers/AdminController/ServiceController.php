@@ -69,6 +69,10 @@ class ServiceController extends Controller
     {
         //dd($request);
         try {
+            $price = explode('VNĐ',$request->price);
+            $price = explode(',' , $price[0]);
+            $price = implode('',$price);
+            $request['price'] = $price;
             $service = ServiceModel::create($request->all());
             if(!empty($service)){
                 return redirect()->route('service.index')->with('success','Created service successfully!');

@@ -11,6 +11,10 @@ use App\Http\Controllers\AdminController\ServiceController;
 use App\Http\Controllers\AdminController\ShiftController;
 use App\Http\Controllers\AdminController\TypeOfMedicineController;
 use App\Http\Controllers\AdminController\UserController;
+use App\Http\Controllers\CustomerController\DoctorController;
+use App\Http\Controllers\CustomerController\HomepageController;
+use App\Http\Controllers\CustomerController\ServiceController as CustomerControllerServiceController;
+use App\Http\Controllers\CustomerController\ServiceDetailController;
 use App\Http\Middleware\CheckLoginAdminPage;
 use Illuminate\Support\Facades\Route;
 
@@ -123,4 +127,24 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
         });
     });
     
+});
+
+Route::prefix('/')->group(function(){
+    Route::group(['controller' => HomepageController::class, 'prefix' => 'homepage', 'as' => 'homepage.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{hompageModel}', 'edit')->name('edit');
+            Route::patch('update/{hompageModel}', 'update')->name('update');
+            Route::delete('destroy/{hompageModel}', 'destroy')->name('destroy'); 
+    });
+    Route::group(['controller' => DoctorController::class, 'prefix' => 'doctor', 'as' => 'doctor.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{doctorModel}', 'detail')->name('detail');
+    });
+    Route::group(['controller' => ServiceDetailController::class, 'prefix' => 'service', 'as' => 'service.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('service/{serviceDetailModel}', 'serviceDetail')->name('serviceDetail');
+    });
+
 });

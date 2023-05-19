@@ -19,7 +19,7 @@ class ServiceModel extends Model
 
     public function price()
     {
-        $price = number_format($this->price,'0',".",",") . "VNĐ";
+        $price = number_format($this->price,'0',".",".") . "VNĐ";
         return $price;
     }
 }
