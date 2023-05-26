@@ -13,7 +13,7 @@ class LoginController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function login()
     {
         if(Auth::check()){
             return view('admin.homepage');
@@ -23,14 +23,12 @@ class LoginController extends Controller
 
     public function processLogin(LoginRequest $request) 
     {
-        //dd($request);
         $check = Auth::attempt($request->only(['email','password']),$request->remember);
-        // dd(Auth::user()->User);
         if($check){
             return redirect()->route('homepage.index')->with('success' , 'Login successfully');
         }
         else{
-            return redirect()->route('login.index')
+            return redirect()->route('admin.login')
             ->with(['error' => 'Tài khoản mật khẩu không chính xác']);
         }
        
@@ -38,7 +36,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login.index');
+        return redirect()->route('admin.login');
     }
     /**
      * Show the form for creating a new resource.

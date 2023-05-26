@@ -58,6 +58,27 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#book" class="nav-link "
+                        aria-controls="book" role="button" aria-expanded="false">
+                        <div
+                            class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                            <i class=" fa ni fa-solid fa-regular fa-calendar-check text-sm opacity-10" style="color: #7a7a7a;"></i>
+                            
+                        </div>
+                        <span class="nav-link-text ms-1">Book</span>
+                    </a>
+                    <div class="collapse " id="book">
+                        <ul class="nav ms-4">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('book.index') }}">
+                                    <span class="sidenav-mini-icon"> B </span>
+                                    <span class="sidenav-normal"> Book </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link "
                         aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div
@@ -97,9 +118,9 @@
                     <div class="collapse " id="ecommerceExamples">
                         <ul class="nav ms-4">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('service.index') }}">
-                                    <span class="sidenav-mini-icon"> S </span>
-                                    <span class="sidenav-normal"> Service </span>
+                                <a class="nav-link " href="{{ route('bill.index') }}">
+                                    <span class="sidenav-mini-icon"> B </span>
+                                    <span class="sidenav-normal"> Bill </span>
                                 </a>
                             </li>
                         </ul>
@@ -116,6 +137,12 @@
                     </a>
                     <div class="collapse " id="authExamples">
                         <ul class="nav ms-4">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('prescription.index') }}">
+                                    <span class="sidenav-mini-icon"> P </span>
+                                    <span class="sidenav-normal"> Prescription </span>
+                                </a>
+                            </li>
                             <li class="nav-item ">
                                 <a class="nav-link " href="{{ route('medicine.index') }}">
                                     <span class="sidenav-mini-icon"> M </span>

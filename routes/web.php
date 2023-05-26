@@ -1,20 +1,30 @@
 <?php
 
+use App\Http\Controllers\AdminController\BillController;
+use App\Http\Controllers\AdminController\BookController;
+use App\Http\Controllers\AdminController\BookDetailController;
 use App\Http\Controllers\AdminController\GroupController;
 use App\Http\Controllers\AdminController\HomepageAdminController;
 use App\Http\Controllers\AdminController\LoginController;
 use App\Http\Controllers\AdminController\ManufacturerController;
 use App\Http\Controllers\AdminController\MedicineController;
+use App\Http\Controllers\AdminController\PrescriptionController;
+use App\Http\Controllers\AdminController\PrescriptionDetailController;
 use App\Http\Controllers\AdminController\RoleController;
 use App\Http\Controllers\AdminController\RoomController;
 use App\Http\Controllers\AdminController\ServiceController;
 use App\Http\Controllers\AdminController\ShiftController;
 use App\Http\Controllers\AdminController\TypeOfMedicineController;
 use App\Http\Controllers\AdminController\UserController;
+use App\Http\Controllers\CustomerController\AppointmentController;
+use App\Http\Controllers\CustomerController\CustomerLoginController;
 use App\Http\Controllers\CustomerController\DoctorController;
 use App\Http\Controllers\CustomerController\HomepageController;
+use App\Http\Controllers\CustomerController\LoginController as CustomerControllerLoginController;
+use App\Http\Controllers\CustomerController\LoginCustomerController;
 use App\Http\Controllers\CustomerController\ServiceController as CustomerControllerServiceController;
 use App\Http\Controllers\CustomerController\ServiceDetailController;
+use App\Http\Middleware\CheckCustomerLogin;
 use App\Http\Middleware\CheckLoginAdminPage;
 use Illuminate\Support\Facades\Route;
 
@@ -29,9 +39,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['controller' =>   LoginController::class, 'prefix' => 'login', 'as' => 'login.'], function () {
-    Route::get('/', 'index')->name('index');
-    Route::post('process', 'processLogin')->name('process');
+Route::group(['controller' =>   LoginController::class, 'prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('/', 'login')->name('login');
+    Route::post('process', 'processLogin')->name('processLogin');
     Route::get('logout', 'logout')->name('logout');
 });
 
@@ -125,26 +135,82 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::delete('destroy/{medicineModel}', 'destroy')->name('destroy');
             
         });
+        //Bils
+        Route::group(['controller' => BillController::class, 'prefix' => 'bill', 'as' => 'bill.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{billModel}', 'edit')->name('edit');
+            Route::patch('update/{billModel}', 'update')->name('update');
+            Route::delete('destroy/{billModel}', 'destroy')->name('destroy'); 
+        });
+        //Books
+        Route::group(['controller' => BookController::class, 'prefix' => 'book', 'as' => 'book.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{bookModel}', 'edit')->name('edit');
+            Route::patch('update/{bookModel}', 'update')->name('update');
+            Route::delete('destroy/{bookModel}', 'destroy')->name('destroy'); 
+            Route::post('/api','api')->name('api');
+        });
+        //BookDetail
+        Route::group(['controller' => BookDetailController::class, 'prefix' => 'bookdetail', 'as' => 'bookdetail.'], function () {
+            Route::get('/{bookModel}', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{bookdetailModel}', 'edit')->name('edit');
+            Route::patch('update/{bookdetailModel}', 'update')->name('update');
+            Route::delete('destroy/{bookdetailModel}', 'destroy')->name('destroy'); 
+        });
+        //Prescription
+        Route::group(['controller' => PrescriptionController::class, 'prefix' => 'prescription', 'as' => 'prescription.'], function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('edit/{prescriptionModel}', 'edit')->name('edit');
+            Route::patch('update/{prescriptionModel}', 'update')->name('update');
+            Route::delete('destroy/{prescriptionModel}', 'destroy')->name('destroy'); 
+        });
+        //Prescription Detail
+        Route::group(['controller' => PrescriptionDetailController::class, 'prefix' => 'prescriptiondetail', 'as' => 'prescriptiondetail.'], function () {
+            Route::get('/{prescriptionModel}', 'index')->name('index');
+            
+        });
     });
     
 });
 
-Route::prefix('/')->group(function(){
-    Route::group(['controller' => HomepageController::class, 'prefix' => 'homepage', 'as' => 'homepage.'], function () {
+Route::group(['controller' => LoginCustomerController::class, 'prefix' => 'login', 'as' => 'login.'], function () {
+    Route::get('/', 'login')->name('login');
+    Route::post('processLogin', 'processLogin')->name('processLogin');
+    Route::get('signup', 'signup')->name('signup');
+    Route::post('processSignUp', 'processSignUp')->name('processSignUp');
+    Route::get('logout', 'logout')->name('logout');
+});
+
+//Route::middleware([CheckCustomerLogin::class])->group(function(){
+    Route::prefix('/')->group(function(){
+        
+        Route::group(['controller' => HomepageController::class, 'prefix' => '', 'as' => '.'], function () {
             Route::get('/', 'index')->name('index');
-            Route::get('create', 'create')->name('create');
-            Route::post('store', 'store')->name('store');
-            Route::get('edit/{hompageModel}', 'edit')->name('edit');
-            Route::patch('update/{hompageModel}', 'update')->name('update');
-            Route::delete('destroy/{hompageModel}', 'destroy')->name('destroy'); 
-    });
-    Route::group(['controller' => DoctorController::class, 'prefix' => 'doctor', 'as' => 'doctor.'], function () {
+        });
+        Route::group(['controller' => DoctorController::class, 'prefix' => 'doctor', 'as' => 'doctor.'], function () {
             Route::get('/', 'index')->name('index');
             Route::get('/{doctorModel}', 'detail')->name('detail');
-    });
-    Route::group(['controller' => ServiceDetailController::class, 'prefix' => 'service', 'as' => 'service.'], function () {
+        });
+        Route::group(['controller' => ServiceDetailController::class, 'prefix' => 'serviceDetail', 'as' => 'serviceDetail.'], function () {
             Route::get('/', 'index')->name('index');
             Route::get('service/{serviceDetailModel}', 'serviceDetail')->name('serviceDetail');
-    });
+        });
+        Route::group(['controller' => AppointmentController::class, 'prefix' => 'appointment', 'as' => 'appointment.'], function () {
+            Route::get('/', 'index')->name('index'); 
+            Route::post('store', 'store')->name('store');
+        });
+        Route::group(['controller' => AppointmentController::class, 'prefix' => 'appointment', 'as' => 'appointment.'], function () {
+            Route::get('/', 'index')->name('index'); 
+            Route::post('store', 'store')->name('store');
+        });
 
-});
+    });
+//});

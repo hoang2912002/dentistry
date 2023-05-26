@@ -16,11 +16,18 @@ class CheckLoginAdminPage
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $arrRoles = ['admin','doctor','bac-si'];
         if(Auth::check()){
+            $arrRoleUser = [Auth::user()->User->group_user[0]->slug];
+            foreach($arrRoles as $arrRole){ 
+                if(in_array($arrRole,$arrRoleUser)){
+                    return $next($request);
+                }
+            }
             return $next($request);
         }
         else{
-            return redirect()->route('login.index');
+            return redirect()->route('admin.login');
         }
         
     }

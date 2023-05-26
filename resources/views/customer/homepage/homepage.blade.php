@@ -1,11 +1,11 @@
 @extends('customer.layout.main')
 @section('title')
     <div class="col-12 col-lg-12 m-auto div-title-homepage">
-        <div class="col-12 col-sm-6 mh-100 title-homepage">
-            <h1>Hãy đến DentiCare và giải quyết vấn đề về răng của bạn.</h1>
+        <div class="col-12 col-sm-3 mh-100 title-homepage">
+            <h1>Hãy đến DentiCare giải quyết vấn đề về răng.</h1>
             
         </div>
-        <div class="col-12 col-sm-6  mt-3 mt-sm-0">
+        <div class="col-12 col-sm-9  mt-3 mt-sm-0">
             <div id="description-carousel" class="carousel fade" data-ride="carousel">
 
 
@@ -40,7 +40,7 @@
                         </div>
                         <div class="footer" style="text-shadow:none">
                             <div class="stats pull-left">
-                                <a href="{{ route('service.serviceDetail',$service->slug) }}" class="text-primary">
+                                <a href="{{ route('serviceDetail.serviceDetail',$service->slug) }}" class="text-primary">
                                     <span style="font-weight: 600;font-size: 14px">Chi tiết +</span>
                                 </a>
                             </div>

@@ -1,20 +1,12 @@
-<!--
-  Get Shit Done Kit Pro (https://www.creative-tim.com/product/get-shit-done-pro)
-  Copyright 2016 Creative-Tim.com
-  Available only with purchase of a Personal or Developer license from https://www.creative-tim.com/product/get-shit-done-pro
--->
-
-
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" sizes="96x96" href="../../assets/img/favicon.png">
     <link rel="canonical" href="https://www.creative-tim.com/product/get-shit-done-pro" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Get Shit Done Kit Pro by Creative Tim</title>
+    <title>Nha Khoa G37</title>
     <meta itemprop="image" content="https://s3.amazonaws.com/creativetim_bucket/products/26/opt_gsdp_thumbnail.jpg">
     <meta name="twitter:image" content="https://s3.amazonaws.com/creativetim_bucket/products/26/opt_gsdp_thumbnail.jpg">
     <meta property="og:url" content="https://gsdk.creative-tim.com/home" />
@@ -28,26 +20,15 @@
         href="{{ asset('asset/admin') }}/css/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Grand+Hotel|Open+Sans:400,300" rel="stylesheet" type="text/css">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/fontawesome-free/all.min.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    {{-- <link href="{{ asset('asset/customer') }}/css/pe-icon-7-stroke.css" rel="stylesheet" /> --}}
 
-    {{-- <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');
-    </script> --}}
+    <!--Toastr-->
+    <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/toastr/toastr.min.css">
+   
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <style>
         .background_homepage {
             background-image:
@@ -61,7 +42,10 @@
         }
 
         .title-homepage>h3,
-        .title-homepage>h1 {
+        .title-homepage>h1,
+        .title-homepage>h2,
+        .title-homepage>h4
+        .title-homepage>h5 {
             color: white;
             font-family: Archivo, sans-serif;
             font-weight: bold
@@ -91,45 +75,7 @@
 
     @include('customer.layout.header')
     <div class="wrapper">
-        {{-- <div class=" parallax filter-black ">
-            <div class="parallax-image">
-                <img src="">
-            </div>
-            <div class=" small-info ">
-                <div class="carousel slide ">
-                    
-                    <div class="col-md-6 ">
-                        <h1>Creative Tim</h1>
-                        <h3>Creative Tim stands for everything a designer looks in his work: clean and beautiful interfaces for
-                            great products.</h3>
-                            
-                    </div>
-                    <div class="col-md-12 m-auto ">
-                        <div id="description-carousel" class="carousel fade" data-ride="carousel">
-
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img src="https://demos.creative-tim.com/get-shit-done-pro/assets/img/examples/home_3.png" alt>
-                                </div>
-                                <div class="item">
-                                    <img src="https://demos.creative-tim.com/get-shit-done-pro/assets/img/examples/home_2.png" alt>
-                                </div>
-                                <div class="item">
-                                    <img src="https://demos.creative-tim.com/get-shit-done-pro/assets/img/examples/home_1.png" alt>
-                                </div>
-                            </div>
-                            <ol class="carousel-indicators">
-                                <li data-target="#description-carousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#description-carousel" data-slide-to="1"></li>
-                                <li data-target="#description-carousel" data-slide-to="2"></li>
-                            </ol>
-                        </div>
-                    </div>
-                </div> 
-                
-            </div>
-            
-        </div> --}}
+        
         <div class="section section-description background_homepage ">
 
             <div class="container tim-container">
@@ -157,23 +103,26 @@
 <script src="{{ asset('asset/customer') }}/js/bootstrap/bootstrap-datepicker.js"></script>
 <script src="{{ asset('asset/customer') }}/js/chartist.min.js"></script>
 <script src="{{ asset('asset/customer') }}/js/jquery/jquery.tagsinput.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+{{-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script> --}}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="{{ asset('asset/admin') }}/js/toastr/toastr.min.js"></script>
 <script src="{{ asset('asset/customer') }}/js/get-shit-done.js"></script>
 <script type="text/javascript">
     var big_image;
 
     var params_url = '';
 
-    $().ready(function() {
+    $().ready(function(){
         responsive = $(window).width();
 
         $(window).on('scroll', gsdk.checkScrollForTransparentNavbar);
 
-        if (responsive >= 768) {
+        if (responsive >= 768){
             big_image = $('.parallax-image').find('img');
 
-            $(window).on('scroll', function() {
+            $(window).on('scroll',function(){
                 parallax();
             });
         }
@@ -185,25 +134,25 @@
 
         $('[rel="tooltip"]').tooltip();
 
-        if (coupon) {
+        if(coupon){
             addQSParm("coupon", coupon);
         }
-        if (ref) {
+        if(ref){
             addQSParm("ref", ref);
         }
 
-        if (coupon) {
+        if(coupon){
             $('#buyButton').html('Buy now with 25% Discount');
         }
 
-        if (ref || coupon) {
+        if(ref || coupon){
             kit_link = $(".navbar-brand").attr('href');
             $(".navbar-brand").attr('href', kit_link + params_url);
 
-            $('.navbar-right a').each(function() {
+            $('.navbar-right a').each(function(){
                 href = $(this).attr('href');
-                if (href != '#') {
-                    $(this).attr('href', href + params_url);
+                if(href != '#'){
+                    $(this).attr('href',href + params_url);
                 }
             });
         }
@@ -211,6 +160,42 @@
 
     });
 
+   var parallax = function() {
+        var current_scroll = $(this).scrollTop();
+
+        oVal = ($(window).scrollTop() / 3);
+        big_image.css('top',oVal);
+    };
+
+    function getUrlParameter(sParam){
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++)
+        {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam){
+                return sParameterName[1];
+            }
+        }
+    }
+</script>
+<script>
+    @if(Session::has('error'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+                toastr.error("{{ session('error') }}");
+    @endif
+    @if(Session::has('success'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+                toastr.success("{{ session('success') }}");
+    @endif
 </script>
 @stack('js')
 </html>

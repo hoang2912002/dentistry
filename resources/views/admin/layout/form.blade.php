@@ -1,6 +1,6 @@
 @push('css')
     <link id="pagestyle" href="{{ asset('asset/admin') }}/css/argon-dashboard.min.css?v=2.0.5" rel="stylesheet" />
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         .async-hide {
             opacity: 0 !important
@@ -14,6 +14,7 @@
     
     <script src="{{ asset('asset/admin') }}/js/plugins/multistep-form.js"></script>
     <script src="{{ asset('asset/admin') }}/js/plugins/choices.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         if (document.getElementById('choices-gender')) {
           var gender = document.getElementById('choices-gender');
@@ -40,6 +41,21 @@
           const example = new Choices(role);
 
         }
+        if (document.getElementById('choices-user')) {
+          var user = document.getElementById('choices-user');
+          const example = new Choices(user);
+
+        }
+        if (document.getElementById('choices-doctor')) {
+          var doctor = document.getElementById('choices-doctor');
+          const example = new Choices(doctor);
+
+        }
+        if (document.getElementById('shift')) {
+          var shift = document.getElementById('shift');
+          const example = new Choices(shift);
+
+        }
         function visible() {
             var elem = document.getElementById('profileVisibility');
             if (elem) {
@@ -64,6 +80,10 @@
             var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");    
             return  n2.split('').reverse().join('') + 'VNĐ';
         }
+        
+    </script>
+    <script>
+
     </script>
 @endpush
 

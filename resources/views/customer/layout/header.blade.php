@@ -3,7 +3,7 @@
 
         <div class="navbar-header ">
 
-            <a class="timLink" href="{{ route('homepage.index') }}" style="display: inline-flex;">
+            <a class="timLink" href="{{ route('.index') }}" style="display: inline-flex;">
                 <div class="logo-container">
                     <div class="logo">
                         <img class="" src="{{ asset('img/customer') }}/denticare-logo-inv.png" alt=""
@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="components.html">
+                    <a href="{{ route('.index') }}">
                         Trang chủ
                     </a>
                 </li>
@@ -62,41 +62,32 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        Liện hệ
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu dropdown-with-icons">
-                        <li>
-                            <a href="contact-us.html">
-                                <i class="pe-7s-mail-open-file"></i> Contact Us
-                            </a>
-                        </li>
-                        <li>
-                            <a href="about-us.html">
-                                <i class="pe-7s-info"></i> About Us
-                            </a>
-                        </li>
-                        <li>
-                            <a href="pricing.html">
-                                <i class="pe-7s-cash"></i> Pricing Page
-                            </a>
-                        </li>
-                        <li>
-                            <a href="sidebar.html">
-                                <i class="pe-7s-menu"></i> Sidebar Menu
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="pe-7s-gift"></i> More (soon)
-                            </a>
-                        </li>
-                    </ul>
+                @if (Auth::check())
+                    <li class="dropdown"> 
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                            {{ Auth::user()->User->name  }}
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-with-icons">
+                            <li>
+                                <a href="{{ route('login.logout') }}">
+                                    <span style="font-weight:bold">LogOut</span>
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="dropdown"> 
+                        <a href="{{ route('login.login') }}"    >
+                            Đăng nhập
+                        </a>
+                    </li>
+                @endif
+                <li>
+                    <a href="{{ route('appointment.index') }}"
+                        class="btn btn-round btn-default">Đặt lịch hẹn</a>
                 </li>
-                <li><a href="https://www.creative-tim.com/product/get-shit-done-pro"
-                        class="btn btn-round btn-default">Đặt lịch hẹn</a></li>
             </ul>
         </div>
     </div>

@@ -17,9 +17,14 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone_number')->nullable();
-            $table->dateTime('date_time');
+            $table->dateTime('date_appointment');
+            $table->unsignedInteger('shift_id');
+            $table->uuid('doctor_uuid');
+            $table->text('note');
             $table->timestamps();
             $table->foreign('user_uuid')->nullable()->references('uuid')->on('users');
+            $table->foreign('doctor_uuid')->nullable()->references('uuid')->on('users');
+            $table->foreign('shift_id')->nullable()->references('id')->on('shifts');
             
         });
     }

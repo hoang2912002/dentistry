@@ -96,7 +96,6 @@
     </div>
 @endsection
 @push('js')
-
     <script>
         var count = 0;
         //Automatic check children
@@ -111,7 +110,6 @@
                 all.prop('checked', false);
             }
         });
-
 
         //Checkbox Group permission
         $('input[name^="group_permission"]').change(function () {

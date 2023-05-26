@@ -38,6 +38,8 @@ class HomepageController extends Controller
         return view('customer.homepage.create',compact('services'));
     }
 
+
+
     /**
      * Store a newly created resource in storage.
      */

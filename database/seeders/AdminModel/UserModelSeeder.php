@@ -19,6 +19,7 @@ class UserModelSeeder extends Seeder
     public function run(): void
     {
         $login = LoginModel::factory()->count(1)->create();
+        
         $user = UserModel::factory()->state(function($user) use($login){
             return [
                 'uuid' => (string)Str::uuid(),
@@ -30,8 +31,11 @@ class UserModelSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:m:s')
             ];
         })->create();
+        
         $number_of_permission = array_key_last(permission()) + 1;
+        //dd($number_of_permission,permission());
         $permission = PermissionModel::factory()->count($number_of_permission)->create();
+        
         $group = GroupModel::factory()->count(1)->create();
         $group_user = GroupUserModel::factory()->state(function($group_user) use($group,$user){
             return [

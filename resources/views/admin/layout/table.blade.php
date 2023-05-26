@@ -1,4 +1,3 @@
-
 @push('css')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/datatables/dataTables.bootstrap4.min.css">
@@ -8,7 +7,6 @@
 @endpush
 
 @push('js')
-
     <script src="{{ asset('asset/admin') }}/js/plugins/datatables/datatables.js"></script>
     <script src="{{ asset('asset/admin') }}/js/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ asset('asset/admin') }}/js/plugins/datatables/dataTables.bootstrap4.min.js"></script>
@@ -50,12 +48,24 @@
                     'next': '<span class="far next-icon"><i class="fas fa-solid fa-angle-right"></i></span>'
                     }
                 },
+                footerCallback: function (row, data, start, end, display) {
+                    if(totalprice === 1){
+                        var api = this.api();
+                        var total = 0;
+                        var arr = [];
+                        data.forEach(element => {
+                            total += parseInt($(element.price).attr('id'))  
+                            return total
+                        });
+                        // Update footer   
+                        $(api.column(5).footer()).html( new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total));
+                    }
+                },
                 
             });
         }
-
-
     </script>
+
     <script>
         function deleteItem(url){
             console.log(url);
