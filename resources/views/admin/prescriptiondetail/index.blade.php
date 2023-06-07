@@ -6,14 +6,12 @@
                 padding: 12px 30px 12px 24px;
                 vertical-align: top;
                 border-top: 1px solid #dee2e6;
-                font-size: 15px;
-                
+                font-size: 15px;   
             }
             .page-item.active .page-link {
                 color: white !important;
                 
             }
-            
     </style>
 @endpush
 @section('content')
@@ -29,8 +27,8 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between pb-0">
                                         <h5 class="mb-0">User: {{ $prescriptionModel->user->name }} </h5>
-                                        <a href="{{ route('group.create') }}" class="btn btn-primary ">
-                                            <span>Create new</span>
+                                        <a href="{{ route('prescriptiondetail.export_file_pdf',$prescriptionModel) }}" class="btn btn-primary ">
+                                            <span>Print</span>
                                         </a>
                                     </div>
                                     <!-- /.card-header -->

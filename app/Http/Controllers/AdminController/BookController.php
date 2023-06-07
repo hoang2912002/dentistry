@@ -12,7 +12,7 @@ use App\Models\AdminModel\UserModel;
 //use App\Models\AdminModel\bookModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-
+use Illuminate\Support\Str;
 class BookController extends Controller
 {
     /**
@@ -41,7 +41,7 @@ class BookController extends Controller
                 $routeDestroy = "'" . route('book.destroy', $book->id) . "'";
                 $route_edit =  '<a href="'. route('book.edit', $book->id) .'" class="badge bg-gradient-secondary"><i class="fas fa-edit"></i></a>';
                 $route_delete = '<a href="javascript:void(0)" class="badge bg-gradient-danger" onclick="deleteItem('. $routeDestroy .')"><i class="fas fa-trash"></i></a>';
-                $route_bill = '<a href="'. route('book.edit', $book->id) .'" class="badge bg-gradient-info"><i class="fas fa-solid fa-file-invoice"></i></a>';
+                $route_bill = '<a href="'. route('bookdetail.index',$book->id) .'" class="badge bg-gradient-info"><i class="fas fa-solid fa-file-invoice"></i></a>';
                 return $route_edit . '&nbsp' . $route_bill . '&nbsp' . $route_delete;
             })
         
@@ -88,8 +88,7 @@ class BookController extends Controller
                 ];
             }
             $arrUser = json_encode($arrUser);
-            return response()->json($arrUser);
-            //dd($arrUser);   
+            return response()->json($arrUser); 
         }
     }
 
@@ -98,12 +97,28 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
+        //dd(($request->except('choices_user')));
         try {
-            $book = BookModel::create($request->all());
+            if(!empty($request->choices_user)){
+                $book = BookModel::create($request->except('choices_user'));
+            }
+            else{
+                //dd($request);
+                $array_user = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone_number' => $request->phone_number,
+                    'date_appointment' => $request->date_appointment,
+                    'shift_id' => $request->shift_id,
+                    'doctor_uuid' => $request->doctor_uuid,
+                    'note' => $request->note,
+                ];
+                $book = BookModel::create($array_user);
+            }
             if(!empty($book)){
                 return redirect()->route('book.index')->with('success' , 'Created book successfully');
             }
+            
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }
@@ -122,7 +137,18 @@ class BookController extends Controller
      */
     public function edit(BookModel $bookModel)
     {
-        //
+        $name_page = [
+            'name' => 'Book Update',
+            'total' => 'Book',
+            'route' => 'book.index'
+        ];
+        //dd($bookModel);
+        $users = UserModel::get();
+        $groups = GroupModel::where('slug','doctor')->value('id');
+        $doctors = GroupUserModel::where('group_id',$groups)->get();
+        $shifts = ShiftModel::all();
+        //dd($doctors[0]->user);
+        return view('admin.book.update',compact('name_page','users','doctors','shifts','bookModel'));
     }
 
     /**
@@ -130,7 +156,15 @@ class BookController extends Controller
      */
     public function update(Request $request, BookModel $bookModel)
     {
-        //
+        try {
+            $book = $bookModel->update($request->all());
+            if(!empty($book)){
+                return redirect()->route('book.index')->with('success' , 'Updated book successfully');
+            }
+            
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
     }
 
     /**

@@ -168,6 +168,7 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::get('/', 'index')->name('index');
             Route::get('create', 'create')->name('create');
             Route::post('store', 'store')->name('store');
+            Route::post('/api','api')->name('api');
             Route::get('edit/{prescriptionModel}', 'edit')->name('edit');
             Route::patch('update/{prescriptionModel}', 'update')->name('update');
             Route::delete('destroy/{prescriptionModel}', 'destroy')->name('destroy'); 
@@ -175,6 +176,7 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
         //Prescription Detail
         Route::group(['controller' => PrescriptionDetailController::class, 'prefix' => 'prescriptiondetail', 'as' => 'prescriptiondetail.'], function () {
             Route::get('/{prescriptionModel}', 'index')->name('index');
+            Route::get('/{prescriptionModel}/pdf', 'export_file_pdf')->name('export_file_pdf');
             
         });
     });

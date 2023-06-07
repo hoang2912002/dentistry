@@ -1,6 +1,6 @@
 @push('css')
     <link id="pagestyle" href="{{ asset('asset/admin') }}/css/argon-dashboard.min.css?v=2.0.5" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
     <style>
         .async-hide {
             opacity: 0 !important
@@ -14,7 +14,7 @@
     
     <script src="{{ asset('asset/admin') }}/js/plugins/multistep-form.js"></script>
     <script src="{{ asset('asset/admin') }}/js/plugins/choices.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
     <script>
         if (document.getElementById('choices-gender')) {
           var gender = document.getElementById('choices-gender');
@@ -55,6 +55,26 @@
           var shift = document.getElementById('shift');
           const example = new Choices(shift);
 
+        }
+        if (document.getElementById('choices-medicine')) {
+          var skills = document.getElementById('choices-medicine');
+          const example = new Choices(skills, {
+            delimiter: ',',
+            editItems: true,
+            maxItemCount: 10,
+            removeItemButton: true,
+            addItems: true
+          });
+        }
+        if (document.getElementById('choices-shift-medicine')) {
+          var skills = document.getElementById('choices-shift-medicine');
+          const example = new Choices(skills, {
+            delimiter: ',',
+            editItems: true,
+            maxItemCount: 10,
+            removeItemButton: true,
+            addItems: true
+          });
         }
         function visible() {
             var elem = document.getElementById('profileVisibility');

@@ -19,13 +19,18 @@ class BookModel extends Model
 
     public function book_name()
     {
-        $name = '<a class="=text-dark px-3 mb-0 font-weight-bold" href='. route('bookdetail.index',$this->id) .'>'. $this->name .'</a>';
+        $name = '<span class="=text-dark px-3 mb-0 font-weight-bold"  >'. $this->name .'</span>';
         return $name;
     }
 
     public function date_appointment()
     {
         return date('d-m-Y', strtotime($this->date_appointment));
+    }
+
+    public function date_appointment_update()
+    {
+        return date('d/m/Y', strtotime($this->date_appointment));
     }
 
     public function shift()

@@ -5,8 +5,9 @@
     <meta charset="utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>
-        G37 Dental management page
+        Nha Khoa G37 trang Admin
     </title>
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('img/customer') }}/icon_page.png">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Font Awesome -->

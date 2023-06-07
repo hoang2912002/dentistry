@@ -26,18 +26,17 @@
                             </div>
                             <div class="d-flex">
                                 <div>
-                                    <h6 class="text-lg mb-0 mt-2">Doctor</h6>
-                                    <h6>{{ $bookModel->doctor() }}</h6>
+                                    <h6 class="text-lg mb-0 mt-2">Doctor: {{ $bookModel->doctor() }}</h6>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12 my-auto text-end">
-                            <a href="{{ route('prescription.index') }}" class="btn bg-gradient-info mb-0">Prescriptions</a>
+                            <a href="{{ route('prescription.create') }}" class="btn bg-gradient-info mb-0">Prescriptions</a>
                         </div>
                     </div>
                     <hr class="horizontal dark mt-4 mb-4">
                     <div class="row">
-                        <div class="col-lg-5 col-md-6 col-12">
+                        <div class="col-lg-4 col-md-6 col-12">
                             <h6 class="mb-3 mt-4">User Information:</h6>
                             <ul class="list-group">
                                 <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
@@ -54,10 +53,10 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-lg-5 col-12 ms-auto">
+                        <div class="col-lg-7 col-12 ms-auto">
                             <h6 class="mb-3 mt-4">Note:</h6>
                             <div
-                                class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+                                class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row ">
                                 <h6 class="mb-0">{{ $bookModel->note }}</h6>
                             </div>
                         </div>

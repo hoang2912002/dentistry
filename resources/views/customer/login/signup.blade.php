@@ -49,14 +49,14 @@
                 <input type="hidden" name="activated" value="1">
                 <input type="hidden" name="group" id="" value="user">
                 <div class="text-center">
-                    <button type="submit" class="btn bg-gradient-dark w-100 mt-3 mb-0">Đăng nhập</button>
+                    <button type="submit" class="btn bg-gradient-dark w-100 mt-3 mb-0">Đăng ký</button>
                 </div>
             </form>
         </div>
         <div class="card-footer text-center pt-0 px-lg-2 px-1">
             <p class="mb-4 text-sm mx-auto">
                 Không có tài khoản?
-                <a href="{{ route('login.signup') }}" class="text-info text-gradient font-weight-bold">Đăng ký</a>
+                <a href="{{ route('login.login') }}" class="text-info text-gradient font-weight-bold">Đăng nhập</a>
             </p>
         </div>
     </div>

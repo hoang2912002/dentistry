@@ -5,9 +5,10 @@ namespace App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\AdminModel\PrescriptionDetailModel;
 use App\Models\AdminModel\PrescriptionModel;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-
+use Barryvdh\DomPDF\PDF;
 class PrescriptionDetailController extends Controller
 {
     /**
@@ -54,48 +55,21 @@ class PrescriptionDetailController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function export_file_pdf(PrescriptionModel $prescriptionModel)
     {
-        //
-    }
+        $prescriptiondetails = PrescriptionDetailModel::
+            join("medicines","medicines.id","=","prescription_details.medicine_id")
+            ->join("shifts","shifts.id","=","prescription_details.shift_id")
+            ->select(['prescription_details.*','shifts.name','medicines.name as medicines_name'])
+            ->where('prescription_id',$prescriptionModel->id)
+            ->get()->groupBy('medicines_name')->all();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // // foreach($prescriptiondetails as $k => $d){
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(PrescriptionDetailModel $prescriptionDetailModel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(PrescriptionDetailModel $prescriptionDetailModel)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, PrescriptionDetailModel $prescriptionDetailModel)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(PrescriptionDetailModel $prescriptionDetailModel)
-    {
-        //
+        // //     dd($d[0]->amount_of_time);
+        // // }
+        // return view('admin.prescriptiondetail.export_file_pdf',compact('prescriptionModel','prescriptiondetails'));
+        $pdf = FacadePdf::loadview('admin.prescriptiondetail.export_file_pdf',compact('prescriptionModel','prescriptiondetails'))->setPaper('A4');
+        return $pdf->download('toa_thuoc.pdf');
     }
 }

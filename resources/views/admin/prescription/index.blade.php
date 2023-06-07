@@ -29,7 +29,7 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between pb-0">
                                         <h5 class="mb-0">{{ $name_page['total'] }}</h5>
-                                        <a href="{{ route('group.create') }}" class="btn btn-primary ">
+                                        <a href="{{ route('prescription.create') }}" class="btn btn-primary ">
                                             <span>Create new</span>
                                         </a>
                                     </div>

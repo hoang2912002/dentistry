@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminModel\MedicineModel;
+use App\Models\AdminModel\PrescriptionDetailModel;
 use App\Models\AdminModel\PrescriptionModel;
+use App\Models\AdminModel\ShiftModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class PrescriptionController extends Controller
@@ -38,8 +43,8 @@ class PrescriptionController extends Controller
                 $routeDestroy = "'" . route('prescription.destroy', $prescription->id) . "'";
                 $route_edit =  '<a href="'. route('prescription.edit', $prescription->id) .'" class="badge bg-gradient-secondary" title="Edit"><i class="fas fa-edit"></i></a>';
                 $route_delete = '<a href="javascript:void(0)" class="badge bg-gradient-danger" onclick="deleteItem('. $routeDestroy .')" title="Delete"><i class="fas fa-trash"></i></a>';
-                $route_bill = '<a href="'. route('prescription.edit', $prescription->id) .'" class="badge bg-gradient-info" title="Detail"><i class="fas fa-solid fa-calendar-week"></i></a>';
-                return $route_edit . '&nbsp' . $route_bill . '&nbsp' . $route_delete;
+                $route_detail = '<a href="'. route('prescription.edit', $prescription->id) .'" class="badge bg-gradient-info" title="Detail"><i class="fas fa-solid fa-calendar-week"></i></a>';
+                return $route_edit . '&nbsp' . $route_detail . '&nbsp' . $route_delete;
             })
         
             ->rawColumns(['prescription_id','user_uuid','user_name','total_quantity','total_price','action'])
@@ -58,7 +63,14 @@ class PrescriptionController extends Controller
      */
     public function create()
     {
-        //
+        $shifts = ShiftModel::all();
+        $medicines = MedicineModel::all();
+        $name_page = [
+            'name' => 'Prescription Create',
+            'total' => 'Prescription',
+            'route' => 'prescription.create'
+        ];
+        return view("admin.prescription.create",compact('name_page','medicines','shifts'));
     }
 
     /**
@@ -66,7 +78,63 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $request['user_uuid'] = Auth::user()->User->uuid ;
+            $price = explode('VNĐ',$request->total_price);
+            $price = explode('.' , $price[0]);
+            $price = implode('',$price);
+            $request['total_price'] = $price;
+            //dd($request->total_quantity/(array_key_last($request->medicine)+1));
+            $prescription = PrescriptionModel::create($request->only('total_quantity','user_uuid','total_price','activated'));
+            if(!empty($prescription)){
+                //dd($prescription->id);
+                foreach($request->medicine as $medicine){
+                    foreach($request->shift_id as $shift){
+                        $price = MedicineModel::where('id',$medicine)->value('price');
+                        $arrPrescriptionDetail[] = [
+                            'prescription_id' => $prescription->id,
+                            'medicine_id' => $medicine,
+                            'shift_id' => $shift,
+                            'price' => $price,
+                            'quantity' => $request->total_quantity/(array_key_last($request->medicine)+1),
+                            'amount_of_time' => 1,
+                            'created_at' =>Carbon::now(),
+                            'updated_at' =>Carbon::now(),
+                        ];
+                    }
+                }
+                //dd($arrPrescriptionDetail);
+                // foreach($arrPrescriptionDetail as $prescriptionDetail){
+                    
+                // }
+                $prescriptionDetail = new PrescriptionDetailModel();
+                $prescriptionDetail->insert($arrPrescriptionDetail);
+                if(!empty($prescriptionDetail)){
+                    return redirect()->route('prescription.index')->with('success','Created prescription successfully!');
+                }
+                
+                //$prescriptionDetail = 
+            }
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
+    }
+
+    public function api(Request $request)
+    {
+        //dd($request->medicine);
+        if(!empty($request->medicine)){
+            foreach($request->medicine as $medicine){
+                $price = MedicineModel::where('id',$medicine)->value('price');
+                $arr[] = $price;
+            }
+            $price = json_encode(array_sum($arr));
+        }
+        else{
+            $price = 0;
+        }
+        return response()->json($price);
+        
     }
 
     /**

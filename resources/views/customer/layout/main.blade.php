@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="../../assets/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('img/customer') }}/icon_page.png">
     <link rel="canonical" href="https://www.creative-tim.com/product/get-shit-done-pro" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Nha Khoa G37</title>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest\LoginRequest\LoginRequest;
+use App\Models\AdminModel\GroupUserModel;
 use App\Models\AdminModel\LoginModel;
+use App\Models\AdminModel\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,9 +25,18 @@ class LoginController extends Controller
 
     public function processLogin(LoginRequest $request) 
     {
-        $check = Auth::attempt($request->only(['email','password']),$request->remember);
-        if($check){
-            return redirect()->route('homepage.index')->with('success' , 'Login successfully');
+        $login = LoginModel::where('email',$request->email)->get();
+        $RoleUser = [$login[0]->User->group_user[0]->slug];
+        $arrRoles = ['admin','doctor','bac-si'];
+        if( in_array($RoleUser[0],$arrRoles)){
+            $check = Auth::attempt($request->only(['email','password']),$request->remember);
+            if($check){
+                return redirect()->route('homepage.index')->with('success' , 'Login successfully');
+            }
+            else{
+                return redirect()->route('admin.login')
+            ->with(['error' => 'Tài khoản mật khẩu không chính xác']);
+            }
         }
         else{
             return redirect()->route('admin.login')

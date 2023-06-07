@@ -34,8 +34,8 @@
 
                             <h3 class="" style="font-weight: 700;">{{ $service->name }}</h3>
                             <br>
-                            <h5 class="">Get Shit Done Kit PRO, the most wanted bootstrap kit is here
-                            </h5>
+                            {{-- <h5 class="">Get Shit Done Kit PRO, the most wanted bootstrap kit is here
+                            </h5> --}}
 
                         </div>
                         <div class="footer" style="text-shadow:none">
@@ -75,10 +75,10 @@
                                     </h4>
                                 </a>
                             </div>
-                            <p class="description text-center"> "Lamborghini Mercy <br>
+                            {{-- <p class="description text-center"> "Lamborghini Mercy <br>
                                 Your chick she so thirsty <br>
                                 I'm in that two seat Lambo"
-                            </p>
+                            </p> --}}
                         </div>
                         <hr>
                         <div class="footer text-center">

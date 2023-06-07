@@ -34,7 +34,7 @@
                                     <div class="row mt-3">
                                         <div class="col-12 col-sm-12">
                                             <label>Search user information</label>
-                                            <select class="form-control" id="choices-user" >
+                                            <select class="form-control" id="choices-user" name="choices_user">
                                                 <option value="">Choose user ...</option>
                                                 @foreach ($users as $item)
                                                     <option value="{{ $item->uuid }}">{{ $item->name }}</option>

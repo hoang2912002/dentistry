@@ -1,13 +1,13 @@
 <nav class="navbar navbar-inverse navbar-transparent navbar-fixed-top" role="navigation">
     <div class="container ">
 
-        <div class="navbar-header ">
+        <div class="navbar-header " style="display: flex;align-items: center">
 
             <a class="timLink" href="{{ route('.index') }}" style="display: inline-flex;">
                 <div class="logo-container">
                     <div class="logo">
-                        <img class="" src="{{ asset('img/customer') }}/denticare-logo-inv.png" alt=""
-                            style="width: 150px;height: 70px">
+                        <img class="" src="{{ asset('img/customer') }}/logo_page_new.png" alt=""
+                            style="width: 100%;height: 70px">
                     </div>
 
                 </div>
@@ -21,46 +21,20 @@
                         Trang chủ
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="home.html">
                         Giới thiệu
                     </a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                </li> --}}
+                <li>
+                    <a href="{{ route('.index') }}">
                         Dịch vụ
-                        <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu dropdown-with-icons">
-                        <li>
-                            <a href="blog-page.html">
-                                <i class="pe-7s-comment"></i> Blog Page
-                            </a>
-                        </li>
-                        <li>
-                            <a href="blog-post.html">
-                                <i class="pe-7s-news-paper"></i> Blog Post
-                            </a>
-                        </li>
-                    </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <li>
+                    <a href="{{ route('.index') }}">
                         Bác sĩ
-                        <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu dropdown-with-icons">
-                        <li>
-                            <a href="ecommerce.html">
-                                <i class="pe-7s-ticket"></i> Store Page
-                            </a>
-                        </li>
-                        <li>
-                            <a href="product-page.html">
-                                <i class="pe-7s-piggy"></i> Product Page
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 @if (Auth::check())
                     <li class="dropdown"> 
