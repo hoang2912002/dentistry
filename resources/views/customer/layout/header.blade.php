@@ -27,13 +27,13 @@
                     </a>
                 </li> --}}
                 <li>
-                    <a href="{{ route('.index') }}">
+                    <a href="{{ route('service.service') }}">
                         Dịch vụ
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('.index') }}">
-                        Bác sĩ
+                    <a href="{{ route('dentist.dentist') }}">
+                        Nha sĩ
                     </a>
                 </li>
                 @if (Auth::check())

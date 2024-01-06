@@ -27,7 +27,7 @@ class LoginController extends Controller
     {
         $login = LoginModel::where('email',$request->email)->get();
         $RoleUser = [$login[0]->User->group_user[0]->slug];
-        $arrRoles = ['admin','doctor','bac-si'];
+        $arrRoles = ['admin','doctor','bac-si','dentist'];
         if( in_array($RoleUser[0],$arrRoles)){
             $check = Auth::attempt($request->only(['email','password']),$request->remember);
             if($check){

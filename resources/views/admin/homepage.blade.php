@@ -317,7 +317,7 @@
             </div>
             <div class="card-body p-3">
                 <ul class="list-group">
-                    @foreach ($books as $book)
+                    {{-- @foreach ($books as $book)
                         <li
                             class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                             <div class="d-flex align-items-center">
@@ -337,7 +337,7 @@
                             </div>
                         </li>
                     @endforeach
-                    
+                     --}}
                 </ul>
             </div>
         </div>

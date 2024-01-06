@@ -148,7 +148,6 @@
             $('input[name^="permission_id"]').prop('checked', false);
             $('input[name^="group_permission"]').prop('checked', false);
             $('input[name^="all"]').prop('checked', false);
-            //console.log(group.value);
             e.preventDefault();
             if($(group).val() !== ''){
                 $.ajax({

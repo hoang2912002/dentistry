@@ -46,6 +46,7 @@
 
         <div class="container-fluid py-4">
             @yield('content')
+            <br>
             @include('admin.layout.footer')
         </div>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">

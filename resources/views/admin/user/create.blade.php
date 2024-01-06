@@ -1,7 +1,41 @@
 @extends('admin.layout.main')
 @include('admin.layout.form')
+@push('css')
+    <style>
+        input[type="file"] {
+            display: block;
+        }
+
+        .imageThumb {
+            height: auto;
+            max-height: 130px;
+            border: 2px solid;
+            padding: 1px;
+            cursor: pointer;
+        }
+
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .remove:hover {
+            background: white;
+            color: black;
+        }
+    </style>
+@endpush
 @section('content')
-    <div class="row mb-5">
+    <div class="row mb-12" >
         <div class="col-12">
             <div class="multisteps-form mb-5">
 
@@ -74,7 +108,6 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                        
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-12 col-sm-6">
@@ -85,8 +118,7 @@
                                                     {{ $message }}
                                                 </div>
                                             @enderror
-                                        </div>
-                                        
+                                        </div>                                        
                                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                             <label>Role</label>
                                             <select class="form-control" name="role" id="choices-role" >
@@ -94,7 +126,6 @@
                                                 @foreach ($groups as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
-                                                
                                             </select>
                                             @error('role')
                                                 <div class="alert alert-danger alert-dismissible text-white p-1 mt-3" role="alert">
@@ -117,70 +148,56 @@
                                     <div class="row mt-3">
                                         <div class="col-sm-auto  d-flex">
                                             <label class="form-check-label mb-0">
+                                                <small id="profileVisibility" style="font-weight: bold">Introduction dentist</small>
+                                            </label>
+                                            <div class="form-check form-switch ms-2">
+                                                <input class="form-check-input" type="checkbox" value="1" 
+                                                id="btn-infor-dentist" name="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- div toggle dentist --}}
+                                    <div class="div-infor-dentist" style="display:none">
+                                        <div class="row mt-3">
+                                            <div class="col-12 col-sm-12">
+                                                <label for="description" class="form-label">Description</label>
+                                                <textarea class="form-control" id="description" rows="10" name="description">{{ $serviceModel->description ?? old('description') }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12 col-sm-12">
+                                                <label>Avatar</label>
+                                                <div class="custom-file">
+                                                    <input type="file"class="multisteps-form__input form-control @error('avatar')  is-invalid @enderror"id="dentistAvatar" name="avatar"  value="avatar">
+                                                    @error('avatar')
+                                                        <div class="alert alert-danger alert-dismissible text-white p-1 mt-3"
+                                                            role="alert">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div class=" d-flex justify-content-center pip" id="avatar">  
+                                                    <img style="width: 200px"  src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921'"title="" id="loading_before"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-sm-auto  d-flex">
+                                            <label class="form-check-label mb-0">
                                                 <small id="profileVisibility">Activated</small>
                                             </label>
                                             <div class="form-check form-switch ms-2">
                                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault23" checked="" onchange="visible()" name="activated" value="1">
-                                            </div>
-                                            
+                                            </div>  
                                         </div>
                                     </div>
-                                    
                                     <div class="button-row d-flex mt-4">
                                         <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next"
                                             type="submit" title="create">Create</button>
                                     </div>
                                 </div>
                             </div>
-                            
-                            {{-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white"
-                                data-animation="FadeIn">
-                                <h5 class="font-weight-bolder">Address</h5>
-                                <div class="multisteps-form__content">
-                                    <div class="row mt-3">
-                                        <div class="col">
-                                            <label>Address 1</label>
-                                            <input class="multisteps-form__input form-control" type="text"
-                                                placeholder="eg. Street 111" />
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col">
-                                            <label>City</label>
-                                            <select class="multisteps-form__select form-control">
-                                                <option selected="selected">...</option>
-                                                <option value="1">State 1</option>
-                                                <option value="2">State 2</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-12 col-sm-6">
-                                            <label>Distinct</label>
-                                            <select class="multisteps-form__select form-control">
-                                                <option selected="selected">...</option>
-                                                <option value="1">State 1</option>
-                                                <option value="2">State 2</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
-                                            <label>Ward</label>
-                                            <select class="multisteps-form__select form-control">
-                                                <option selected="selected">...</option>
-                                                <option value="1">State 1</option>
-                                                <option value="2">State 2</option>
-                                            </select>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="button-row d-flex mt-4">
-                                        <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button"
-                                            title="Prev">Prev</button>
-                                        <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next"
-                                            type="button" title="Next">Next</button>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </form>
                     </div>
                     
@@ -189,3 +206,56 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        $('#btn-infor-dentist').on('click', function() {
+            var option = $('#btn-infor-dentist');
+            $('.div-infor-dentist').slideToggle();
+        })
+        $(document).ready(function() {
+        if (window.File && window.FileList && window.FileReader) {
+            $("#dentistAvatar").on("change", function(e) {
+                var clickedButton = this;
+                $(clickedButton).parents().find("#avatar").hide();
+                var files = e.target.files,
+                    filesLength = files.length;
+                for (var i = 0; i < filesLength; i++) {
+                    var f = files[i]
+
+                    var fileReader = new FileReader();
+                    fileReader.onload = (function(e) {
+                        var file = e.target;
+                        $(clickedButton).parents().find("#avatar #loading_before").hide();
+                        $("<div class=\" pip\" id=\"avatar\">" +
+                            "<span class=\"pip\">" +
+                            "<img style=\"width: 200px\" class=\"image\" src=\"" + e
+                            .target.result + "\" title=\"" + file.name + "\" />" +
+                            "<br/><span class=\"remove\">Remove image</span>" +
+                            "</span>" +
+                            "</div>"
+                        ).insertAfter(clickedButton);
+                        $(".remove").click(function() {
+                            $(this).parent(".pip").remove();
+                            if ($(clickedButton).parents().find("#avatar .image").prop('src') == null) {
+                                $.ajax({
+                                    url: '{!! route('service.api') !!}',
+                                    data: {
+                                        service_id: $('.service_id').val()
+                                    },
+                                    method: 'post',
+                                    success: function(response) {
+                                        $('#dentistAvatar').val('');
+                                    }
+                                });
+                            }
+                        });
+                    });
+                    fileReader.readAsDataURL(f);
+                }
+            });
+        } else {
+            alert("Your browser doesn't support to File API")
+        }
+    });
+    </script>
+@endpush

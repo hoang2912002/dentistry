@@ -50,7 +50,33 @@
             font-family: Archivo, sans-serif;
             font-weight: bold
         }
-
+        .div-address{
+            width: 100%;
+            text-align: center;
+        }
+        .redirect-a{
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            font-family: Archivo, sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 30px;
+            text-align: center;
+            text-decoration-line: none;
+            transition-delay: 0.05s;
+            justify-content: center;
+        }
+        .redirect-a:hover{
+            color: rgb(103, 185, 48);
+            
+        }
+        .current-address{
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 30px;
+            color: rgb(255, 255, 255);
+        }
+    
         .card-service:hover {
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         }
@@ -64,6 +90,7 @@
         .background-footer{
             background-image: url("{{ asset('img/customer/6327035de6b80312b6eaed9a_footer-bg.png')}}");
         }
+
     </style>
     @stack('css')
 </head>

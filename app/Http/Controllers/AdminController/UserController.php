@@ -7,6 +7,7 @@ use App\Http\Requests\AdminRequest\UserRequest\StoreRequest;
 use App\Http\Requests\AdminRequest\UserRequest\UpdateRequest;
 use App\Models\AdminModel\GroupModel;
 use App\Models\AdminModel\GroupUserModel;
+use App\Models\AdminModel\InforDentistModel;
 use App\Models\AdminModel\LoginModel;
 use App\Models\AdminModel\RoleModel;
 use App\Models\AdminModel\UserModel;
@@ -82,12 +83,10 @@ class UserController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        // dd($request->merge([
-        //     'login_id' => 'id',
-        //     'uuid' => (string)Str::uuid()
-        // ]));
-        //dd($request);
+        
         try {
+            
+            $dentistInformation = $request->only(['avatar','description']);
             $login = LoginModel::create($request->only('email','password','phone_number','activated'));
             if(!empty($login)){
                 $request->merge([
@@ -102,14 +101,33 @@ class UserController extends Controller
                     'login_id' => $login->id,
                 ];
                 $user = UserModel::create($array_user);
+                $dentistInformation['dentist_uuid'] = $user->uuid;
                 if(!empty($user)){
                     $role = GroupUserModel::create([
                         'user_uuid' => $user->uuid,
                         'group_id' => $request->role
                     ]);
                     if(!empty($role)){
+                        if($request->hasFile('avatar')){
+                            $avatar = $request->avatar;
+                            $nameAvatar = $avatar->getClientOriginalName();
+                            $dirFolder = 'img/admin/dentist/';
+                            $newAvatar = $dirFolder . 'dentist' . '-' . (string)Str::uuid() .  '-' . $nameAvatar;
+                            $dentistInformation['avatar'] = $newAvatar;
+                            
+                            @unlink($newAvatar);
+                            $dentist = InforDentistModel::create($dentistInformation);
+                            if(!empty($dentist)){
+                                if(!empty($avatar)){
+                                    $avatar->move($dirFolder, $newAvatar);
+                                    
+                                }
+                            }
+                        }
                         return redirect()->route('user.index')->with('success' , 'Created user successfully');
+                        
                     }
+                    
                 }
             }
         } catch (\Throwable $th) {
@@ -138,8 +156,9 @@ class UserController extends Controller
             'total' => 'User',
             'route' => 'user.index'
         ];
-        //dd($userModel->name);
-        return view('admin.user.update',compact('userModel','group_user','groups','name_page'));
+        $dentistInformation = InforDentistModel::where('dentist_uuid',$userModel->uuid)->get();
+        // dd($dentistInformation);
+        return view('admin.user.update',compact('userModel','group_user','groups','name_page','dentistInformation'));
 
     }
 
@@ -181,6 +200,10 @@ class UserController extends Controller
     {
         try {
             $this->authorize('delete', $userModel);
+            $dentist = InforDentistModel::where('dentist_uuid',$userModel->uuid)->get()->all();
+            if(!empty($dentist)){
+                $dentist = InforDentistModel::where('dentist_uuid',$userModel->uuid)->delete();
+            }
             $group_user = GroupUserModel::where('user_uuid',$userModel->uuid)->delete();
             if($userModel->delete()){
                 $login = LoginModel::where('id',$userModel->login_id)->delete();

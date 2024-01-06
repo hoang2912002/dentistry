@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->double('price');
+            $table->string('logo');
+            $table->text('description');
             $table->boolean('activated')->default(0);
             $table->timestamps();
         });

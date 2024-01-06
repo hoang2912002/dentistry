@@ -27,7 +27,7 @@ class UserModel extends Model
     {
         return $this->belongsToMany(GroupModel::class,'group_users','user_uuid', 'group_id', 'uuid', 'id')->withPivot('group_id');
     }
-
+    
     public function getPermision()
     {
         $groups = $this->group_user;

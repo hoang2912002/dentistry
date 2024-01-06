@@ -18,6 +18,7 @@ use App\Http\Controllers\AdminController\TypeOfMedicineController;
 use App\Http\Controllers\AdminController\UserController;
 use App\Http\Controllers\CustomerController\AppointmentController;
 use App\Http\Controllers\CustomerController\CustomerLoginController;
+use App\Http\Controllers\CustomerController\DentistController;
 use App\Http\Controllers\CustomerController\DoctorController;
 use App\Http\Controllers\CustomerController\HomepageController;
 use App\Http\Controllers\CustomerController\LoginController as CustomerControllerLoginController;
@@ -101,6 +102,8 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::get('create', 'create')->name('create');
             Route::post('store', 'store')->name('store');
             Route::get('edit/{serviceModel}', 'edit')->name('edit');
+            Route::post('api', 'api')->name('api');
+            Route::post('api_service_sku', 'api_service_sku')->name('api_service_sku');
             Route::patch('update/{serviceModel}', 'update')->name('update');
             Route::delete('destroy/{serviceModel}', 'destroy')->name('destroy');
             
@@ -201,10 +204,17 @@ Route::group(['controller' => LoginCustomerController::class, 'prefix' => 'login
             Route::get('/', 'index')->name('index');
             Route::get('/{doctorModel}', 'detail')->name('detail');
         });
-        Route::group(['controller' => ServiceDetailController::class, 'prefix' => 'serviceDetail', 'as' => 'serviceDetail.'], function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('service/{serviceDetailModel}', 'serviceDetail')->name('serviceDetail');
+        Route::group(['controller' => ServiceDetailController::class, 'prefix' => 'service', 'as' => 'service.'], function () {
+            Route::get('/', 'service')->name('service');
+            Route::get('/{serviceDetailModel}', 'serviceDetail')->name('serviceDetail');
+           
         });
+        Route::group(['controller' => DentistController::class, 'prefix' => 'dentist', 'as' => 'dentist.'], function () {
+            Route::get('/', 'dentist')->name('dentist');
+            Route::get('/{dentistDetailModel}', 'dentistDetail')->name('dentistDetail');
+           
+        });
+       
         Route::group(['controller' => AppointmentController::class, 'prefix' => 'appointment', 'as' => 'appointment.'], function () {
             Route::get('/', 'index')->name('index'); 
             Route::post('store', 'store')->name('store');

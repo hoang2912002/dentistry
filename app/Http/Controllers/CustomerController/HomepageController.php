@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Controller;
 use App\Models\AdminModel\GroupModel;
 use App\Models\AdminModel\GroupUserModel;
+use App\Models\AdminModel\InforDentistModel;
 use App\Models\AdminModel\ServiceModel;
 use App\Models\AdminModel\UserModel;
 use App\Models\CustomerModel\HomepageModel;
@@ -17,16 +18,20 @@ class HomepageController extends Controller
      */
     public function index()
     {
-        $group = GroupModel::where('slug','doctor')->value('id');
+        $group = GroupModel::where('slug','dentist')->value('id');
         $groupUsers = GroupUserModel::where('group_id',$group)->get();
+
         //dd($groupUser);
         // foreach($groupUser as $a){
         //     dd($a->user);
         // }
         // $staffs = UserModel::where();
         $services = ServiceModel::all();
-        //dd($services);
-        return view('customer.homepage.homepage',compact('services','groupUsers'));
+        $dentists = InforDentistModel::all();
+        foreach($dentists as $dentist){
+            $arr[$dentist->dentist_uuid] = $dentist->avatar; 
+        }
+        return view('customer.homepage.homepage',compact('services','groupUsers','arr'));
     }
 
     /**

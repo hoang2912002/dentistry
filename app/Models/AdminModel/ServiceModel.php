@@ -10,7 +10,7 @@ class ServiceModel extends Model
     use HasFactory;
     protected $table = 'services';
     protected $fillable = [
-        'name', 'slug', 'price', 'activated'
+        'name', 'slug', 'price','logo','description', 'activated'
     ];
     public function getRouteKeyName()
     {
@@ -21,5 +21,10 @@ class ServiceModel extends Model
     {
         $price = number_format($this->price,'0',".",".") . "VNĐ";
         return $price;
+    }
+
+    public function description() {
+        $return = str_split($this->description,89);
+        return $return[0];
     }
 }
