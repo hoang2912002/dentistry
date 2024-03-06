@@ -11,7 +11,7 @@
 
 
 @push('js')
-    
+
     <script src="{{ asset('asset/admin') }}/js/plugins/multistep-form.js"></script>
     <script src="{{ asset('asset/admin') }}/js/plugins/choices.min.js"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
@@ -19,7 +19,7 @@
         if (document.getElementById('choices-gender')) {
           var gender = document.getElementById('choices-gender');
           const example = new Choices(gender);
-          
+
         }
         if (document.getElementById('choices-role')) {
           var role = document.getElementById('choices-role');
@@ -87,20 +87,20 @@
             }
         }
         //Format VNĐ price
-        $('input[name^="price"]').on('input', function(e){        
+        $('input[name^="price"]').on('input', function(e){
             $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g,'')));
         }).on('keypress',function(e){
                 if(!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
-        }).on('paste', function(e){    
-                var cb = e.originalEvent.clipboardData || window.clipboardData;      
+        }).on('paste', function(e){
+                var cb = e.originalEvent.clipboardData || window.clipboardData;
                 if(!$.isNumeric(cb.getData('text'))) e.preventDefault();
         });
         function formatCurrency(number){
             var n = number.split('').reverse().join("");
-            var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");    
+            var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");
             return  n2.split('').reverse().join('') + 'VNĐ';
         }
-        
+
     </script>
     <script>
 

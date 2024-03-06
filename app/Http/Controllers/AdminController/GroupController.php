@@ -25,13 +25,14 @@ class GroupController extends Controller
         ];
         if($request->ajax()){
             $groups = GroupModel::get();
-            //dd($groups);
+
             return DataTables::of($groups)
             ->editColumn('id', function ($group) {
+                
                 return $group->id;
             })
             ->editColumn('name', function ($group) {
-                
+
                 return $group->name;
             })
             ->editColumn('slug', function ($group) {
@@ -40,11 +41,11 @@ class GroupController extends Controller
             ->addColumn('action', function ($group) {
                 $routeDestroy = "'" . route('group.destroy', $group->slug) . "'";
                 $route_edit =  '<a href="'. route('group.edit', $group->slug) .'" class="badge bg-gradient-secondary"><i class="fas fa-edit"></i></a>';
-                
+
                 $route_delete = '<a href="javascript:void(0)" class="badge bg-gradient-danger" onclick="deleteItem('. $routeDestroy .')"><i class="fas fa-trash"></i></a>';
                 return $route_edit . '&nbsp' . $route_delete;
             })
-        
+
             ->rawColumns(['id','name','slug','action'])
             ->make();
         }
@@ -69,7 +70,7 @@ class GroupController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreRequest $request)
-    {   
+    {
         try {
             $group = GroupModel::create($request->all());
             if(!empty($group)){
@@ -130,7 +131,7 @@ class GroupController extends Controller
             $group_user =GroupUserModel::where('group_id',$groupModel->id);
             if($group_user->get()->all() !== []){
                 //dd($group_user);
-                $group_user->delete();  
+                $group_user->delete();
             }
             $group = $groupModel->delete();
             if(!empty($group)){

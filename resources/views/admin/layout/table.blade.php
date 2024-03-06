@@ -21,9 +21,9 @@
     <script src="{{ asset('asset/admin') }}/js/plugins/datatables/buttons.print.min.js"></script>
     <script src="{{ asset('asset/admin') }}/js/plugins/datatables/buttons.colVis.min.js"></script> --}}
     <script src="{{ asset('asset/admin') }}/js/plugins/sweetalert/2.1.2/sweetalert.min.js"></script>
-   
+
     <script>
-       
+
         function renderTable(url, columns, totalprice) {
             $('#dataTable').DataTable({
                 "paging": true,
@@ -54,14 +54,14 @@
                         var total = 0;
                         var arr = [];
                         data.forEach(element => {
-                            total += parseInt($(element.price).attr('id'))  
+                            total += parseInt($(element.price).attr('id'))
                             return total
                         });
-                        // Update footer   
+                        // Update footer
                         $(api.column(5).footer()).html( new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total));
                     }
                 },
-                
+
             });
         }
     </script>

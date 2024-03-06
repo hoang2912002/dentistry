@@ -88,7 +88,7 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::get('edit/{roomModel}', 'edit')->name('edit');
             Route::patch('update/{roomModel}', 'update')->name('update');
             Route::delete('destroy/{roomModel}', 'destroy')->name('destroy');
-            
+
         });
         //Role
         Route::group(['controller' => RoleController::class, 'prefix' => 'role', 'as' => 'role.'], function () {
@@ -106,7 +106,7 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::post('api_service_sku', 'api_service_sku')->name('api_service_sku');
             Route::patch('update/{serviceModel}', 'update')->name('update');
             Route::delete('destroy/{serviceModel}', 'destroy')->name('destroy');
-            
+
         });
         //Type of medicines
         Route::group(['controller' => TypeOfMedicineController::class, 'prefix' => 'typeOfMedicine', 'as' => 'typeOfMedicine.'], function () {
@@ -116,7 +116,7 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::get('edit/{typeOfMedicineModel}', 'edit')->name('edit');
             Route::patch('update/{typeOfMedicineModel}', 'update')->name('update');
             Route::delete('destroy/{typeOfMedicineModel}', 'destroy')->name('destroy');
-            
+
         });
         //Manufaturer
         Route::group(['controller' => ManufacturerController::class, 'prefix' => 'manufacturer', 'as' => 'manufacturer.'], function () {
@@ -126,7 +126,7 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::get('edit/{manufacturerModel}', 'edit')->name('edit');
             Route::patch('update/{manufacturerModel}', 'update')->name('update');
             Route::delete('destroy/{manufacturerModel}', 'destroy')->name('destroy');
-            
+
         });
         //Medicines
         Route::group(['controller' => MedicineController::class, 'prefix' => 'medicine', 'as' => 'medicine.'], function () {
@@ -136,7 +136,7 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::get('edit/{medicineModel}', 'edit')->name('edit');
             Route::patch('update/{medicineModel}', 'update')->name('update');
             Route::delete('destroy/{medicineModel}', 'destroy')->name('destroy');
-            
+
         });
         //Bils
         Route::group(['controller' => BillController::class, 'prefix' => 'bill', 'as' => 'bill.'], function () {
@@ -145,7 +145,7 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::post('store', 'store')->name('store');
             Route::get('edit/{billModel}', 'edit')->name('edit');
             Route::patch('update/{billModel}', 'update')->name('update');
-            Route::delete('destroy/{billModel}', 'destroy')->name('destroy'); 
+            Route::delete('destroy/{billModel}', 'destroy')->name('destroy');
         });
         //Books
         Route::group(['controller' => BookController::class, 'prefix' => 'book', 'as' => 'book.'], function () {
@@ -154,7 +154,7 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::post('store', 'store')->name('store');
             Route::get('edit/{bookModel}', 'edit')->name('edit');
             Route::patch('update/{bookModel}', 'update')->name('update');
-            Route::delete('destroy/{bookModel}', 'destroy')->name('destroy'); 
+            Route::delete('destroy/{bookModel}', 'destroy')->name('destroy');
             Route::post('/api','api')->name('api');
         });
         //BookDetail
@@ -164,7 +164,7 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::post('store', 'store')->name('store');
             Route::get('edit/{bookdetailModel}', 'edit')->name('edit');
             Route::patch('update/{bookdetailModel}', 'update')->name('update');
-            Route::delete('destroy/{bookdetailModel}', 'destroy')->name('destroy'); 
+            Route::delete('destroy/{bookdetailModel}', 'destroy')->name('destroy');
         });
         //Prescription
         Route::group(['controller' => PrescriptionController::class, 'prefix' => 'prescription', 'as' => 'prescription.'], function () {
@@ -174,16 +174,16 @@ Route::middleware([CheckLoginAdminPage::class])->group(function(){
             Route::post('/api','api')->name('api');
             Route::get('edit/{prescriptionModel}', 'edit')->name('edit');
             Route::patch('update/{prescriptionModel}', 'update')->name('update');
-            Route::delete('destroy/{prescriptionModel}', 'destroy')->name('destroy'); 
+            Route::delete('destroy/{prescriptionModel}', 'destroy')->name('destroy');
         });
         //Prescription Detail
         Route::group(['controller' => PrescriptionDetailController::class, 'prefix' => 'prescriptiondetail', 'as' => 'prescriptiondetail.'], function () {
             Route::get('/{prescriptionModel}', 'index')->name('index');
             Route::get('/{prescriptionModel}/pdf', 'export_file_pdf')->name('export_file_pdf');
-            
+
         });
     });
-    
+
 });
 
 Route::group(['controller' => LoginCustomerController::class, 'prefix' => 'login', 'as' => 'login.'], function () {
@@ -196,7 +196,7 @@ Route::group(['controller' => LoginCustomerController::class, 'prefix' => 'login
 
 //Route::middleware([CheckCustomerLogin::class])->group(function(){
     Route::prefix('/')->group(function(){
-        
+
         Route::group(['controller' => HomepageController::class, 'prefix' => '', 'as' => '.'], function () {
             Route::get('/', 'index')->name('index');
         });
@@ -207,20 +207,20 @@ Route::group(['controller' => LoginCustomerController::class, 'prefix' => 'login
         Route::group(['controller' => ServiceDetailController::class, 'prefix' => 'service', 'as' => 'service.'], function () {
             Route::get('/', 'service')->name('service');
             Route::get('/{serviceDetailModel}', 'serviceDetail')->name('serviceDetail');
-           
+
         });
         Route::group(['controller' => DentistController::class, 'prefix' => 'dentist', 'as' => 'dentist.'], function () {
             Route::get('/', 'dentist')->name('dentist');
             Route::get('/{dentistDetailModel}', 'dentistDetail')->name('dentistDetail');
-           
+
         });
-       
+
         Route::group(['controller' => AppointmentController::class, 'prefix' => 'appointment', 'as' => 'appointment.'], function () {
-            Route::get('/', 'index')->name('index'); 
+            Route::get('/', 'index')->name('index');
             Route::post('store', 'store')->name('store');
         });
         Route::group(['controller' => AppointmentController::class, 'prefix' => 'appointment', 'as' => 'appointment.'], function () {
-            Route::get('/', 'index')->name('index'); 
+            Route::get('/', 'index')->name('index');
             Route::post('store', 'store')->name('store');
         });
 

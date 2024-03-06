@@ -63,7 +63,7 @@
                         <div
                             class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                             <i class=" fa ni fa-solid fa-regular fa-calendar-check text-sm opacity-10" style="color: #7a7a7a;"></i>
-                            
+
                         </div>
                         <span class="nav-link-text ms-1">Book</span>
                     </a>
@@ -83,7 +83,7 @@
                         aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div
                             class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-                            
+
                             <i class="fa ni fa-solid fa-user-shield text-sm opacity-10" style="color: #7a7a7a;"></i>
                         </div>
                         <span class="nav-link-text ms-1">Decentralization</span>
@@ -111,7 +111,7 @@
                         <div
                             class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                             <i class="fa ni fa-solid fa-cart-plus text-sm opacity-10" style="color: #7a7a7a;"></i>
-                            
+
                         </div>
                         <span class="nav-link-text ms-1">Bill</span>
                     </a>
@@ -189,7 +189,7 @@
                         role="button" aria-expanded="false">
                         <div
                             class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-                            
+
                             <i class="fa ni fa-solid fa-book-open text-sm opacity-10" style="color: #7a7a7a;"></i>
                         </div>
                         <span class="nav-link-text ms-1">Service</span>

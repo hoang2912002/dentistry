@@ -21,16 +21,16 @@
 
     <!--Box icon-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <link href="{{ asset('asset/admin') }}/css/nucleo/nucleo-icons.css" rel="stylesheet" />
     <link href="{{ asset('asset/admin') }}/css/nucleo/nucleo-svg.css" rel="stylesheet" />
     <link id="pagestyle" href="{{ asset('asset/admin') }}/css/argon-dashboard.min.css?v=2.0.5" rel="stylesheet" />
-    
+
     <!--Toastr-->
     <link rel="stylesheet" href="{{ asset('asset/admin') }}/css/toastr/toastr.min.css">
-   
+
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @stack('css')
 </head>
 
@@ -57,7 +57,7 @@
         </div>
     </main>
     {{-- @include('admin.layout.right_sidebar') --}}
-    
+
     <script src="{{ asset('asset/admin') }}/js/plugins/jquery/jquery.min.js"></script>
     <script src="{{ asset('asset/admin') }}/js/plugins/jquery/jquery-ui.min.js"></script>
     <script src="{{ asset('asset/admin') }}/js/core/popper.min.js"></script>
@@ -73,7 +73,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{{ asset('asset/admin') }}/js/toastr/toastr.min.js"></script>
     {{-- <script src="{{ asset('asset/admin') }}/js/argon-dashboard.min.js?v=2.0.5"></script> --}}
-    
+
     <script>
         $.ajaxSetup({
             headers: {

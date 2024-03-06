@@ -36,6 +36,7 @@ class UserModel extends Model
                 return $permission->name;
             },$group->role->all());
         }
+        //dd($permissions);
         return $permissions ?? ['null'];
     }
 

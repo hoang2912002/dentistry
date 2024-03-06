@@ -7,17 +7,17 @@
                 vertical-align: top;
                 border-top: 1px solid #dee2e6;
                 font-size: 15px;
-                
+
             }
             .page-item.active .page-link {
                 color: white !important;
-                
+
             }
-            
+
     </style>
 @endpush
 @section('content')
-    
+
     <div class="row mt-4">
         <div class="col-12">
             <div class="content-wrapper">
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    
+
         @endsection
         @push('js')
             <script>

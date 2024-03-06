@@ -190,7 +190,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class=" d-flex justify-content-center pip" id="avatar">  
-                                                    <img style="width: 200px" class="imageLogo" src="{{ isset($dentistInformation[0]->avatar)  ? asset($dentistInformation[0]->avatar) : 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921' }}"title="{{$dentistInformation[0]->avatar }}" />
+                                                    <img style="width: 200px" class="imageLogo" src="{{ !empty($dentistInformation[0]->avatar)  ? asset($dentistInformation[0]->avatar) : 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921' }}"title="" />
     
                                                 </div>
                                             </div>

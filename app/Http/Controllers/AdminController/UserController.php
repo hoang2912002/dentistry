@@ -68,7 +68,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        
         $this->authorize('create', UserModel::class);
+
         $name_page = [
             'name' => 'User Create',
             'total' => 'User',
@@ -150,14 +152,27 @@ class UserController extends Controller
     {
         $this->authorize('update', $userModel);
         $group_user = GroupUserModel::where('user_uuid',$userModel->uuid)->value('group_id');
+        
         $groups = GroupModel::all();
         $name_page = [
             'name' => 'User Update',
             'total' => 'User',
             'route' => 'user.index'
         ];
-        $dentistInformation = InforDentistModel::where('dentist_uuid',$userModel->uuid)->get();
-        // dd($dentistInformation);
+        //dd($groups);
+        
+        $arr= [
+            0 => 'dentist',
+            1 => 'doctor',
+        ];
+        if(in_array($userModel->group_user->all(),$arr)){
+            
+            $dentistInformation = InforDentistModel::where('dentist_uuid',$userModel->uuid)->get();
+        }
+        else{
+            
+            $dentistInformation[0] = '';
+        }
         return view('admin.user.update',compact('userModel','group_user','groups','name_page','dentistInformation'));
 
     }

@@ -43,7 +43,7 @@ class PrescriptionController extends Controller
                 $routeDestroy = "'" . route('prescription.destroy', $prescription->id) . "'";
                 $route_edit =  '<a href="'. route('prescription.edit', $prescription->id) .'" class="badge bg-gradient-secondary" title="Edit"><i class="fas fa-edit"></i></a>';
                 $route_delete = '<a href="javascript:void(0)" class="badge bg-gradient-danger" onclick="deleteItem('. $routeDestroy .')" title="Delete"><i class="fas fa-trash"></i></a>';
-                $route_detail = '<a href="'. route('prescription.edit', $prescription->id) .'" class="badge bg-gradient-info" title="Detail"><i class="fas fa-solid fa-calendar-week"></i></a>';
+                $route_detail = '<a href="'. route('prescriptiondetail.index', $prescription->id) .'" class="badge bg-gradient-info" title="Detail"><i class="fas fa-solid fa-calendar-week"></i></a>';
                 return $route_edit . '&nbsp' . $route_detail . '&nbsp' . $route_delete;
             })
         

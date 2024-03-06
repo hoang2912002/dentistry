@@ -17,7 +17,7 @@ class AppointmentController extends Controller
     public function index()
     {
         //dd(permission());
-        $group = GroupModel::where('slug','doctor')->value('id');
+        $group = GroupModel::where('slug','dentist')->value('id');
         $groupUsers = GroupUserModel::where('group_id',$group)->get();
         $services = ServiceModel::all();
         $shifts = ShiftModel::all();

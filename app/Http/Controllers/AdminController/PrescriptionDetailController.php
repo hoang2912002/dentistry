@@ -57,6 +57,7 @@ class PrescriptionDetailController extends Controller
      */
     public function export_file_pdf(PrescriptionModel $prescriptionModel)
     {
+        
         $prescriptiondetails = PrescriptionDetailModel::
             join("medicines","medicines.id","=","prescription_details.medicine_id")
             ->join("shifts","shifts.id","=","prescription_details.shift_id")
@@ -70,6 +71,6 @@ class PrescriptionDetailController extends Controller
         // // }
         // return view('admin.prescriptiondetail.export_file_pdf',compact('prescriptionModel','prescriptiondetails'));
         $pdf = FacadePdf::loadview('admin.prescriptiondetail.export_file_pdf',compact('prescriptionModel','prescriptiondetails'))->setPaper('A4');
-        return $pdf->download('toa_thuoc.pdf');
+        return $pdf->download('toa_thuoc-' . $prescriptionModel->user_uuid . '.pdf');
     }
 }
